@@ -1,0 +1,24 @@
+services:
+
+  website-app:
+    container_name: website-app
+    build: .
+    volumes:
+      - ./website-app:/var/www/html
+    ports:
+      - 9020:80
+  
+  mysql_db:
+    image: mysql:8.0.33
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: website_app
+    ports:
+    - 3306:3306
+  
+  phpmyadmin:
+    image: phpmyadmin:5.2.1
+    ports:
+      - 9021:80
+    environment:
+      - PMA_ARBITRARY=1
